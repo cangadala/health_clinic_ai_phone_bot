@@ -1,11 +1,15 @@
 # Doctor Fakir's Clinic Phone Line
 
-Doctor Fakir's Clinic is an automated phone bot that handles the gathering and assignment of basic patient intro information.
+Doctor Fakir's Clinic is an automated phone bot that handles the gathering and assignment of basic patient intro information. Built using Vocode and other tools.
 
 ### Details
 
-- Automated patient introduction form process.
-  Built using Vocode and other tools
+The bot asks the caller for different pieces of information, it does some basic verification on a lot of this data, then gets confirmation about that information from the caller, and then tells them the available open appointment times, confirms that and saves the data.
+
+Not implemented yet:
+- the text message with full confirmation details
+
+###
 
 ### Prerequisites
 
