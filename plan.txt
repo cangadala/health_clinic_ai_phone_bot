@@ -1,0 +1,16 @@
+Put fundamentals
+1. 
+
+
+Services Used:
+1. OpenAI
+2. Azure Speech
+3. Twilio for telephony
+4. Ngrock to host telephony
+
+
+
+
+
+Complete Check
+1. create requirements.txt
