@@ -11,3 +11,6 @@ class IndividualPatientData:
         self.address = ""
         self.contact_number = ""
         self.appointment_date = ""
+    
+    def to_dict(self):
+        return vars(self)

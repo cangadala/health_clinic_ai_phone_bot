@@ -51,6 +51,7 @@ class HealthInfoAgent(RespondAgent[HealthInfoAgentConfig]):
         self.appointment_confirmed = False
         self.has_referred_physician = False
         self.patient_data = IndividualPatientData()
+        self.save_path = "data/patient_data"
         self.available_appointments = []
 
     async def respond(self, human_input, conversation_id: str, is_interrupt: bool = False) -> Tuple[str, bool]:
@@ -111,7 +112,10 @@ class HealthInfoAgent(RespondAgent[HealthInfoAgentConfig]):
             response = await self.handle_confirm_appointment(human_input, ConversationState.END_CONVERSATION)
 
         elif self.conversation_state == ConversationState.END_CONVERSATION:
+            with open(self.save_path, 'w') as f:
+                json.dump(self.patient_data.to_dict(), f)
             response = message_constants.GOODBYES['thanks']
+            # have a text message action factory call here
             
         return response, False
 
