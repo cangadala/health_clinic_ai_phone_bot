@@ -1,6 +1,6 @@
-# Doctor Fakir's Clinic Telephony System
+# Doctor Fakir's Clinic Phone Line
 
-Doctor Fakir's Clinic offers a telephony system to streamline the patient introduction process, ensuring a seamless interaction from the start of the call.
+Doctor Fakir's Clinic is an automated phone bot that handles the gathering and assignment of basic patient intro information.
 
 ### Details
 
