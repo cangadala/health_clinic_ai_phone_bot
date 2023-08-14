@@ -22,13 +22,13 @@ RESPONSE = {
     2: "Can you please provide your name?",
     3: "Can you please provide your date of birth?",
     4: "What is the name of your insurance provider?",
-    5: "Please enunciate out each character and number as you provide your insurance ID information now.",
+    5: "Could you please enunciate out each number as you provide your insurance ID?",
     6: "Do you have a referral for a particular physician at the clinic?",
-    7: "Can you provide the full name the clinic physician you've been referred to?",
+    7: "Current serving physicians include John Smith, Jane Doe, Alan Turing, and Anna Test. Can you provide the full name the clinic physician you've been referred to?",
     8: "Can you describe your primary reason for calling?",
     9: "What is your current address?",
     10: "What is a good phone number I can use to reach you?",
-    11: "Let's confirm your information before we book the appointment.",
+    11: "Let's confirm your information before we book the appointment. I  will be silent for a minute. Does that sound fine?",
     14: "Let's confirm the just booked appointment once again, sound good?",
     101: "Your insurance provider is not accepted by our clinic. Would you still like to proceed with this process?"
 }
@@ -38,7 +38,7 @@ REPEAT = {
     "name": "Can you please provide your full name again?",
     "dob": "Please provide your date of birth in the format of the month then day then year?",
     "insurance_provider": "Could you please provide the name of your current insurance provider again?",
-    "insurance_id": "Could you repeat your insurance ID again ",
+    "insurance_id": "Could you repeat your insurance ID again?",
     "": "",
     "referral_physician": "Could you repeat the full name of the physician you've been referred to again?",
     "call_reason": "Can you describe your primary reason for calling?",
@@ -47,4 +47,3 @@ REPEAT = {
     "confirm_patient_info": "Is all the provided information correct?",
     "confirm_appointment": "Could you please repeat if the currently booked appointment is correct?",
 }
-

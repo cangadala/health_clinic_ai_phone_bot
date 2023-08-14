@@ -67,7 +67,20 @@ def is_valid_insurance_provider(insurance_provider_input: str) -> str:
 
 
 def is_valid_insurance_id(insurance_id_input: str) -> bool:
-    return len(insurance_id_input) == 4
+    prompt = f"Convert the string '{insurance_id_input}' into a numerical format (e.g., 'four, Four, Four, four' becomes '4444'). Only reply with the numerical result."
+    logger.debug(f"LLM id input: {insurance_id_input}")
+    completion = openai.ChatCompletion.create(
+        model="gpt-3.5-turbo",
+        messages=[
+            {"role": "system", "content": "You are a helpful assistant."},
+            {"role": "user", "content": prompt}
+        ]
+    )
+
+    parsed_num = completion.choices[0]['message']['content']
+    logger.debug(f"LLM id num response: {parsed_num}")
+    return True, parsed_num
+    return len(parsed_num) == 4
 
 
 def is_valid_physician_name(name: str) -> bool:
@@ -82,7 +95,7 @@ def is_valid_address(address: str) -> bool:
 
 
 def is_valid_phone_number(phone_num: str) -> Tuple[bool, str]:
-    prompt = f"Convert the string '{phone_num}' into a numerical format (e.g., 'four, Four, Four, four' becomes '4444')."
+    prompt = f"Convert the string '{phone_num}' into a numerical format (e.g., 'four, Four, Four, four' becomes '4444'). Only reply with the numerical result."
     logger.debug(f"LLM phone input: {phone_num}")
     completion = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
@@ -94,24 +107,40 @@ def is_valid_phone_number(phone_num: str) -> Tuple[bool, str]:
 
     parsed_num = completion.choices[0]['message']['content']
     logger.debug(f"LLM phone num response: {parsed_num}")
+    return True, parsed_num
     return bool(len(parsed_num) == 10), parsed_num
 
 
 
 def read_patient_data(patient_data, has_referred_physician):
-    return (
-        f"Let's confirm the following information:\n"
-        f"Your first name is: {patient_data.first_name}\n"
-        f"Your last name is: {patient_data.last_name}\n"
-        f"Your date of birth is: {patient_data.dob}\n"
-        f"The name of your Insurance Provider is: {patient_data.insurance_provider}\n"
-        f"Your Insurance ID is: {patient_data.insurance_id}\n"
-        f"Referred physician (if any): {patient_data.referred_physician_first_name}{' '}{patient_data.referred_physician_last_name}\n"
-        f"The reason you're calling is: {patient_data.call_reason}\n"
-        f"Your address is: {patient_data.address}\n"
-        f"Your contact number is: {patient_data.contact_number}\n"
-        f"Is all this information correct?"
-    )
+    if has_referred_physician:
+        return (
+            f"Let's confirm the following information:\n"
+            f"Your first name is: {patient_data.first_name}\n"
+            f"Your last name is: {patient_data.last_name}\n"
+            f"Your date of birth is: {patient_data.dob}\n"
+            f"The name of your Insurance Provider is: {patient_data.insurance_provider}\n"
+            f"Your Insurance ID is: {patient_data.insurance_id}\n"
+            f"Referred physician (if any): {patient_data.referred_physician_first_name}{' '}{patient_data.referred_physician_last_name}\n"
+            f"The reason you're calling is: {patient_data.call_reason}\n"
+            f"Your address is: {patient_data.address}\n"
+            f"Your contact number is: {patient_data.contact_number}\n"
+            f"Is all this information correct?"
+        )
+    else:
+        return (
+            f"Let's confirm the following information:\n"
+            f"Your first name is: {patient_data.first_name}\n"
+            f"Your last name is: {patient_data.last_name}\n"
+            f"Your date of birth is: {patient_data.dob}\n"
+            f"The name of your Insurance Provider is: {patient_data.insurance_provider}\n"
+            f"Your Insurance ID is: {patient_data.insurance_id}\n"
+            f"The reason you're calling is: {patient_data.call_reason}\n"
+            f"Your address is: {patient_data.address}\n"
+            f"Your contact number is: {patient_data.contact_number}\n"
+            f"Is all this information correct?"
+        )
+
    
 
     

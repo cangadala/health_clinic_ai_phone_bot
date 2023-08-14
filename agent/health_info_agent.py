@@ -80,7 +80,7 @@ class HealthInfoAgent(RespondAgent[HealthInfoAgentConfig]):
                 response = message_constants.RESPONSE[ConversationState.ASK_REFERRAL_INFO.value]
                 self.conversation_state = ConversationState.ASK_REFERRAL_INFO
             else:
-                self.available_appointments = agent_utils.five_closest_appointments()
+                self.available_appointments = agent_utils.closest_appointments()
                 response = message_constants.GREETINGS["no_problem"] + message_constants.SPACE + message_constants.RESPONSE[ConversationState.ASK_CALL_REASON.value]
                 self.conversation_state = ConversationState.ASK_CALL_REASON
         
@@ -128,7 +128,6 @@ class HealthInfoAgent(RespondAgent[HealthInfoAgentConfig]):
         if agent_utils.is_valid_name(human_input):
             self.patient_data.first_name = text_utils.strip_punctuation(human_input.split()[0])
             self.patient_data.last_name = text_utils.strip_punctuation(human_input.split()[1])
-            self.previous_state = self.conversation_state
             self.conversation_state = next_state
             return message_constants.GREETINGS["thanks"] + message_constants.SPACE + message_constants.RESPONSE[next_state.value]
         else:
@@ -159,8 +158,9 @@ class HealthInfoAgent(RespondAgent[HealthInfoAgentConfig]):
 
     async def handle_insurance_id(self, human_input, next_state):
         human_input = text_utils.strip_punctuation(human_input)
-        if agent_utils.is_valid_insurance_id(human_input):
-            self.patient_data.insurance_id = human_input 
+        valid, id_val = agent_utils.is_valid_insurance_id(human_input)
+        if valid:
+            self.patient_data.insurance_id = id_val 
             self.conversation_state = next_state
             return message_constants.GREETINGS["thanks"] + message_constants.SPACE + message_constants.RESPONSE[next_state.value]
         else:

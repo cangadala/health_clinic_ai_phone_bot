@@ -12,6 +12,7 @@ from vocode.streaming.models.message import BaseMessage
 from vocode.streaming.telephony.server.base import TwilioInboundCallConfig, TelephonyServer
 from vocode.streaming.models.transcriber import DeepgramTranscriberConfig, PunctuationEndpointingConfig
 from vocode.streaming.models.synthesizer import ElevenLabsSynthesizerConfig
+from vocode.streaming.models.synthesizer import AzureSynthesizerConfig
 
 # Local imports
 import config
